@@ -1,5 +1,7 @@
 // Components (atomic + composite)
 export { PitchCard } from './components/pitch-card';
+export { PitchForm } from './components/pitch-form';
+export { PitchDetail } from './components/pitch-detail';
 export { ClaimList } from './components/claim-list';
 export { ClaimRequestButton } from './components/claim-request-button';
 export { ExpertCard } from './components/expert-card';
@@ -29,16 +31,16 @@ export { JoinCommunityCard } from './components/join-community-card';
 export { TipsAdminTable } from './components/tips-admin-table';
 export { TopicsAdminTable } from './components/topics-admin-table';
 
-// Page components (added in Task 12 — currently commented out)
-// export { CommunityHomePage } from './pages/community-home-page';
-// export { PitchesPage } from './pages/pitches-page';
-// export { PitchDetailPage } from './pages/pitch-detail-page';
-// export { PitchNewPage } from './pages/pitch-new-page';
-// export { ExpertsPage } from './pages/experts-page';
-// export { TipsNewPage } from './pages/tips-new-page';
-// export { ProfilePage } from './pages/profile-page';
-// export { SettingsPage } from './pages/settings-page';
-// export { LinkConflictPage } from './pages/link-conflict-page';
+// Page components (wave 6)
+export { CommunityHomePage } from './pages/community-home-page';
+export { PitchesPage } from './pages/pitches-page';
+export { PitchDetailPage } from './pages/pitch-detail-page';
+export { PitchNewPage } from './pages/pitch-new-page';
+export { ExpertsPage } from './pages/experts-page';
+export { TipsNewPage } from './pages/tips-new-page';
+export { ProfilePage } from './pages/profile-page';
+export { SettingsPage } from './pages/settings-page';
+export { LinkConflictPage } from './pages/link-conflict-page';
 
 // Re-export types and hooks for convenience
 export * from './types';
