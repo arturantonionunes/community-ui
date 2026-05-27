@@ -94,8 +94,9 @@ export async function getHandleAvailability(
   handle: string,
 ): Promise<{ available: boolean; reason?: string; nextAvailableAt?: string }> {
   const qs = new URLSearchParams({ candidate: handle });
+  const query = qs.toString();
   const res = await ctx.fetch(
-    `${ctx.base}/api/community/users/me/handle-availability?${qs.toString()}`,
+    `${ctx.base}/api/community/users/me/handle-availability${query ? `?${query}` : ''}`,
     { method: 'GET', credentials: 'include' },
   );
   return jsonOrThrow<{ available: boolean; reason?: string; nextAvailableAt?: string }>(
