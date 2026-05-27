@@ -1,6 +1,8 @@
 'use client';
+import { useState } from 'react';
+import { Button } from '../primitives/button';
+import { NewMessageDialog } from './new-message-dialog';
 
-/** Stub — full implementation in a future wave. */
 interface ProfileSendMessageButtonProps {
   peerId: string;
   peerHandle: string;
@@ -9,6 +11,23 @@ interface ProfileSendMessageButtonProps {
   peerByline?: string | null;
 }
 
-export function ProfileSendMessageButton(_props: ProfileSendMessageButtonProps) {
-  return null;
+export function ProfileSendMessageButton({ peerId, peerHandle: _peerHandle, peerDisplayName, peerIsVerified, peerByline }: ProfileSendMessageButtonProps) {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Button type="button" onClick={() => setOpen(true)}>
+        Send message
+      </Button>
+      {open && (
+        <NewMessageDialog
+          initialPeer={{ id: peerId, displayName: peerDisplayName, isVerified: peerIsVerified, byline: peerByline ?? null }}
+          onClose={() => setOpen(false)}
+          onSent={(conversationId) => {
+            setOpen(false);
+            window.location.href = `/community?dm=${encodeURIComponent(conversationId)}`;
+          }}
+        />
+      )}
+    </>
+  );
 }

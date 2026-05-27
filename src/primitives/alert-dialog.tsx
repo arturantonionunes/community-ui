@@ -1,11 +1,12 @@
 'use client';
 import * as React from 'react';
 import {
-  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
+  Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
 } from './dialog';
 import { cn } from './cn';
 
 export const AlertDialog = Dialog;
+export const AlertDialogTrigger = DialogTrigger;
 export const AlertDialogContent = DialogContent;
 export const AlertDialogHeader = DialogHeader;
 export const AlertDialogTitle = DialogTitle;
