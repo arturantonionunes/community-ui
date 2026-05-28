@@ -88,12 +88,12 @@ export function ChatShell({ me, rooms, initialRoomSlug, initialMessages }: ChatS
 
   return (
     <div
-      className="bg-background"
+      className="overflow-hidden rounded-xl border bg-background shadow-sm"
       style={{
         display: 'grid',
-        gridTemplateColumns: '260px 1fr 240px',
-        height: 'calc(100vh - 80px)',
-        minHeight: '600px',
+        gridTemplateColumns: '240px 1fr 220px',
+        height: 'min(80vh, 760px)',
+        minHeight: '560px',
       }}
     >
       {/* Left rail */}
