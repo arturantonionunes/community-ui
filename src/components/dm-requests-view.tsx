@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { MessageSquare } from 'lucide-react';
 import { Button } from '../primitives/button';
 
 interface RequestEntry {
@@ -33,7 +34,11 @@ export function DmRequestsView({ meId: _meId }: { meId: string }) {
       <div className="border-b px-4 py-2 font-bold">Message requests</div>
       <div className="flex-1 overflow-y-auto p-2">
         {requests.length === 0 ? (
-          <div className="p-4 text-sm text-slate-400">No pending requests.</div>
+          <div className="rounded-xl border border-dashed border-border bg-card/50 p-10 text-center">
+            <MessageSquare className="mx-auto mb-3 size-8 text-muted-foreground/60" />
+            <p className="text-sm font-medium text-foreground">No pending requests.</p>
+            <p className="mt-1 text-xs text-muted-foreground">Message requests from non-contacts appear here.</p>
+          </div>
         ) : (
           requests.map((r) => (
             <div key={r.id} className="mb-2 rounded-lg border p-3">

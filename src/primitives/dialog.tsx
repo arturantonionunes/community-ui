@@ -34,7 +34,7 @@ export function DialogContent({ children, className }: { children: React.ReactNo
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div
-        className="absolute inset-0 bg-black/50"
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200"
         onClick={() => ctx.onOpenChange(false)}
         aria-hidden="true"
       />
@@ -42,7 +42,8 @@ export function DialogContent({ children, className }: { children: React.ReactNo
         role="dialog"
         aria-modal="true"
         className={cn(
-          'relative z-10 w-full max-w-md rounded-lg border bg-background p-6 shadow-lg',
+          'relative z-10 w-full max-w-md rounded-xl border bg-background p-6 shadow-2xl',
+          'animate-in fade-in zoom-in-95 duration-200',
           className,
         )}
       >

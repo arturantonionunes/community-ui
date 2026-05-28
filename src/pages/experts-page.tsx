@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Users } from 'lucide-react';
 import { Button } from '../primitives/button';
 import { Input } from '../primitives/input';
 import { Label } from '../primitives/label';
@@ -64,8 +65,10 @@ export async function ExpertsPage({ session, searchParams, apiBase }: ExpertsPag
       </form>
 
       {experts.length === 0 ? (
-        <div className="rounded-lg border border-dashed border-border p-12 text-center text-sm text-muted-foreground">
-          No experts match these filters.
+        <div className="rounded-xl border border-dashed border-border bg-card/50 p-12 text-center">
+          <Users className="mx-auto mb-3 size-10 text-muted-foreground/60" />
+          <p className="text-sm font-medium text-foreground">No experts match these filters.</p>
+          <p className="mt-1 text-xs text-muted-foreground">Try adjusting the filters or clear them.</p>
         </div>
       ) : (
         <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">

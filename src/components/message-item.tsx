@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { ReportDialog } from './report-dialog';
+import { Avatar } from '../primitives/avatar';
 
 export interface ChatMessage {
   id: string;
@@ -15,7 +16,7 @@ export function MessageItem({ message }: { message: ChatMessage }) {
   const [reportOpen, setReportOpen] = useState(false);
   return (
     <div className="flex gap-2 px-4 py-1.5">
-      <div className="size-7 shrink-0 rounded-full bg-muted" />
+      <Avatar src={message.author.avatarUrl} alt={message.author.displayName} fallback={message.author.displayName} size="xs" />
       <div className="min-w-0 flex-1">
         <div className="text-xs text-muted-foreground">
           <strong className="text-foreground">{message.author.displayName}</strong>
@@ -25,7 +26,7 @@ export function MessageItem({ message }: { message: ChatMessage }) {
             <button
               type="button"
               onClick={() => setReportOpen(true)}
-              className="ml-2 cursor-pointer border-none bg-transparent text-[10px] text-slate-400 hover:text-slate-600"
+              className="ml-2 cursor-pointer border-none bg-transparent text-[10px] text-slate-400 transition-colors duration-200 hover:text-slate-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
             >
               Report
             </button>

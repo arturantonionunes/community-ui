@@ -1,16 +1,18 @@
 'use client';
 import Link from 'next/link';
 import type { PitchDetail as PitchDetailType } from '../types';
+import { cn } from '../primitives/cn';
 import { ProfileSendMessageButton } from './profile-send-message-button';
 import { ClaimRequestButton } from './claim-request-button';
 import { ClaimList } from './claim-list';
+import { Avatar } from '../primitives/avatar';
 
-const STATUS_COLOR: Record<string, string> = {
-  open: '#10b981',
-  claimed: '#f59e0b',
-  in_progress: '#3b82f6',
-  published: '#8b5cf6',
-  archived: '#9ca3af',
+const STATUS_BADGE: Record<string, string> = {
+  open: 'bg-emerald-500/15 text-emerald-700 ring-1 ring-inset ring-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-400',
+  claimed: 'bg-amber-500/15 text-amber-700 ring-1 ring-inset ring-amber-500/30 dark:bg-amber-500/10 dark:text-amber-400',
+  in_progress: 'bg-blue-500/15 text-blue-700 ring-1 ring-inset ring-blue-500/30 dark:bg-blue-500/10 dark:text-blue-400',
+  published: 'bg-violet-500/15 text-violet-700 ring-1 ring-inset ring-violet-500/30 dark:bg-violet-500/10 dark:text-violet-400',
+  archived: 'bg-slate-500/15 text-slate-700 ring-1 ring-inset ring-slate-500/30 dark:bg-slate-500/10 dark:text-slate-400',
 };
 
 interface PitchDetailProps {
@@ -19,7 +21,6 @@ interface PitchDetailProps {
 }
 
 export function PitchDetail({ pitch, viewerCommunityUserId }: PitchDetailProps) {
-  const color = STATUS_COLOR[pitch.status] ?? '#9ca3af';
   const isOwner = viewerCommunityUserId === pitch.ownerId;
   const viewerCanClaim = !!viewerCommunityUserId && !isOwner;
 
@@ -29,8 +30,7 @@ export function PitchDetail({ pitch, viewerCommunityUserId }: PitchDetailProps) 
         <div className="flex items-start justify-between gap-3">
           <h1 className="text-2xl font-bold text-foreground">{pitch.title}</h1>
           <span
-            className="inline-flex shrink-0 items-center rounded-full px-2 py-0.5 text-xs font-medium capitalize text-white"
-            style={{ background: color }}
+            className={cn('inline-flex shrink-0 items-center rounded-full px-2 py-0.5 text-xs font-medium capitalize', STATUS_BADGE[pitch.status] ?? STATUS_BADGE.archived)}
           >
             {pitch.status.replace('_', ' ')}
           </span>
@@ -81,12 +81,7 @@ export function PitchDetail({ pitch, viewerCommunityUserId }: PitchDetailProps) 
       )}
 
       <section className="flex items-center gap-3 rounded-lg border bg-muted/30 p-3">
-        <div
-          aria-hidden
-          className="flex size-10 shrink-0 items-center justify-center rounded-full bg-muted text-sm font-semibold text-muted-foreground"
-        >
-          {pitch.ownerDisplayName.charAt(0).toUpperCase()}
-        </div>
+        <Avatar src={null} alt={pitch.ownerDisplayName} fallback={pitch.ownerDisplayName} size="md" />
         <div className="flex flex-1 flex-col gap-0.5">
           <div className="flex items-center gap-1.5 text-sm font-semibold">
             {pitch.ownerDisplayName}

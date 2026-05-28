@@ -42,5 +42,8 @@ export { ProfilePage } from './pages/profile-page';
 export { SettingsPage } from './pages/settings-page';
 export { LinkConflictPage } from './pages/link-conflict-page';
 
+// Primitives
+export { Avatar } from './primitives/avatar';
+
 // Re-export types and hooks for convenience
 export * from './types';

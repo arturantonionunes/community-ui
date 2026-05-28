@@ -16,7 +16,8 @@ export function RoomList({ rooms, activeSlug, onSelect }: {
             type="button"
             onClick={() => onSelect(r.slug)}
             className={cn(
-              'rounded-md px-3 py-1.5 text-left text-sm text-foreground transition-colors hover:bg-accent/50',
+              'rounded-md px-3 py-1.5 text-left text-sm text-foreground transition-colors duration-200 hover:bg-accent/50',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
               isActive ? 'bg-accent font-semibold' : 'font-normal',
             )}
           >

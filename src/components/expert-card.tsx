@@ -4,6 +4,7 @@ import type { ExpertSummary } from '../types';
 import { ProfileSendMessageButton } from './profile-send-message-button';
 import { ExpertisePills } from './expertise-pills';
 import { Button } from '../primitives/button';
+import { Avatar } from '../primitives/avatar';
 
 interface ExpertCardProps {
   expert: ExpertSummary;
@@ -16,12 +17,7 @@ export function ExpertCard({ expert, viewerCommunityUserId }: ExpertCardProps) {
 
   return (
     <article className="flex items-start gap-3 rounded-xl border bg-card p-4">
-      <div
-        aria-hidden
-        className="flex size-12 shrink-0 items-center justify-center rounded-full bg-muted text-lg font-semibold text-muted-foreground"
-      >
-        {expert.displayName.charAt(0).toUpperCase()}
-      </div>
+      <Avatar src={null} alt={expert.displayName} fallback={expert.displayName} size="lg" />
       <div className="flex min-w-0 flex-1 flex-col gap-1.5">
         <div className="flex items-center gap-1.5 text-sm font-semibold text-foreground">
           {expert.displayName}

@@ -38,7 +38,8 @@ export function DmSidebar({ inbox, requestsCount, activeDmId, isRequestsActive, 
               type="button"
               onClick={() => onSelectDm(c.id)}
               className={cn(
-                'flex w-full items-center justify-between rounded-md px-2.5 py-1 text-left text-sm text-foreground transition-colors hover:bg-accent/50',
+                'flex w-full items-center justify-between rounded-md px-2.5 py-1 text-left text-sm text-foreground transition-colors duration-200 hover:bg-accent/50',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
                 isActive ? 'bg-accent' : 'bg-transparent',
                 isActive || bold ? 'font-semibold' : 'font-normal',
               )}
@@ -60,7 +61,8 @@ export function DmSidebar({ inbox, requestsCount, activeDmId, isRequestsActive, 
         type="button"
         onClick={onSelectRequests}
         className={cn(
-          'mt-1.5 w-full rounded-md px-2.5 py-1 text-left text-xs transition-colors hover:bg-accent/50',
+          'mt-1.5 w-full rounded-md px-2.5 py-1 text-left text-xs transition-colors duration-200 hover:bg-accent/50',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
           isRequestsActive ? 'bg-accent' : 'bg-transparent',
           requestsCount > 0 ? 'text-foreground' : 'text-muted-foreground',
           isRequestsActive || requestsCount > 0 ? 'font-semibold' : 'font-normal',
@@ -71,7 +73,7 @@ export function DmSidebar({ inbox, requestsCount, activeDmId, isRequestsActive, 
       <button
         type="button"
         onClick={() => setDialogOpen(true)}
-        className="mt-2 w-full rounded-md border border-dashed border-input bg-transparent px-2.5 py-1 text-[11px] text-slate-600 transition-colors hover:bg-accent/40"
+        className="mt-2 w-full cursor-pointer rounded-md border border-dashed border-input bg-transparent px-2.5 py-1 text-[11px] text-slate-600 transition-colors duration-200 hover:bg-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
       >
         + New message
       </button>
