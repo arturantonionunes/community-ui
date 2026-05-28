@@ -32,7 +32,10 @@ export async function PitchesPage({ session, searchParams, apiBase, cookieHeader
   void session;
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-8 grid grid-cols-1 md:grid-cols-[220px_1fr] gap-6">
+    <main
+      className="mx-auto max-w-6xl px-4 py-8 gap-6"
+      style={{ display: 'grid', gridTemplateColumns: 'minmax(220px, 280px) 1fr' }}
+    >
       <aside className="rounded-xl border bg-muted/30 p-4 md:sticky md:top-4 h-fit">
         <h2 className="mb-3 text-sm font-semibold">Filters</h2>
         <form method="GET" className="flex flex-col gap-3">

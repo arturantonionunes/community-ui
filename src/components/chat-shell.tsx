@@ -87,7 +87,15 @@ export function ChatShell({ me, rooms, initialRoomSlug, initialMessages }: ChatS
   };
 
   return (
-    <div className="grid h-[calc(100vh-80px)] grid-cols-[260px_1fr_220px] bg-background">
+    <div
+      className="bg-background"
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '260px 1fr 240px',
+        height: 'calc(100vh - 80px)',
+        minHeight: '600px',
+      }}
+    >
       {/* Left rail */}
       <aside className="flex min-h-0 flex-col overflow-y-auto border-r bg-card/30">
         <RoomList rooms={rooms} activeSlug={mode === 'room' ? activeSlug : ''} onSelect={onSelectRoom} />
