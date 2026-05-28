@@ -11,6 +11,7 @@ export interface PitchesPageProps {
   session: CommunitySession;
   searchParams: { status?: string; tag?: string; q?: string; owner?: string; before?: string };
   apiBase: string;
+  cookieHeader?: string;
 }
 
 const VALID_STATUSES: PitchStatus[] = ['open', 'claimed', 'in_progress', 'published', 'archived'];
@@ -18,8 +19,8 @@ function asStatus(v: string | undefined): PitchStatus | undefined {
   return v && (VALID_STATUSES as string[]).includes(v) ? (v as PitchStatus) : undefined;
 }
 
-export async function PitchesPage({ session, searchParams, apiBase }: PitchesPageProps) {
-  const client = createCommunityClient({ baseUrl: apiBase.replace(/\/api\/community$/, '') });
+export async function PitchesPage({ session, searchParams, apiBase, cookieHeader }: PitchesPageProps) {
+  const client = createCommunityClient({ baseUrl: apiBase.replace(/\/api\/community$/, ''), cookieHeader });
   const pitches = await client.pitches.list({
     status: asStatus(searchParams.status),
     tag: searchParams.tag,

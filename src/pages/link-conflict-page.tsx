@@ -4,6 +4,7 @@ export interface LinkConflictPageProps {
   session: CommunitySession | null;
   searchParams: Record<string, string | string[] | undefined>;
   apiBase: string;
+  cookieHeader?: string;
   conflict: LinkConflictPayload;
 }
 

@@ -11,10 +11,11 @@ export interface ExpertsPageProps {
   session: CommunitySession;
   searchParams: { tag?: string; q?: string; verified?: string };
   apiBase: string;
+  cookieHeader?: string;
 }
 
-export async function ExpertsPage({ session, searchParams, apiBase }: ExpertsPageProps) {
-  const client = createCommunityClient({ baseUrl: apiBase.replace(/\/api\/community$/, '') });
+export async function ExpertsPage({ session, searchParams, apiBase, cookieHeader }: ExpertsPageProps) {
+  const client = createCommunityClient({ baseUrl: apiBase.replace(/\/api\/community$/, ''), cookieHeader });
   const tag = searchParams.tag?.trim() || undefined;
   const q = searchParams.q?.trim() || undefined;
   const verifiedOnly = searchParams.verified === '1' || searchParams.verified === 'true';

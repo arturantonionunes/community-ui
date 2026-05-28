@@ -7,9 +7,10 @@ export interface TipsNewPageProps {
   session: CommunitySession | null;
   searchParams: Record<string, string | string[] | undefined>;
   apiBase: string;
+  cookieHeader?: string;
 }
 
-export async function TipsNewPage({ session, searchParams, apiBase }: TipsNewPageProps) {
+export async function TipsNewPage({ session, searchParams, apiBase, cookieHeader }: TipsNewPageProps) {
   void searchParams;
   void apiBase;
 

@@ -19,6 +19,12 @@ import { uploadImage } from './upload';
 export interface CommunityClientOptions {
   baseUrl: string;
   fetch?: typeof fetch;
+  /**
+   * Server-side rendering only — pass the incoming request's Cookie header
+   * so server-side fetches into the same host carry the user's session.
+   * Browser fetches use `credentials: 'include'` and don't need this.
+   */
+  cookieHeader?: string;
 }
 
 export interface ClientCtx {
@@ -27,9 +33,17 @@ export interface ClientCtx {
 }
 
 export function createCommunityClient(opts: CommunityClientOptions) {
-  const f = opts.fetch ?? fetch;
+  const baseFetch = opts.fetch ?? fetch;
+  const cookieHeader = opts.cookieHeader;
+  const wrappedFetch: typeof fetch = cookieHeader
+    ? (input, init) => {
+        const headers = new Headers(init?.headers);
+        if (!headers.has('cookie')) headers.set('cookie', cookieHeader);
+        return baseFetch(input, { ...init, headers });
+      }
+    : baseFetch;
   const base = opts.baseUrl.replace(/\/+$/, '');
-  const ctx: ClientCtx = { base, fetch: f };
+  const ctx: ClientCtx = { base, fetch: wrappedFetch };
 
   return {
     pitches: {

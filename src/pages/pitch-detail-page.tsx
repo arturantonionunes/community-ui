@@ -8,11 +8,12 @@ export interface PitchDetailPageProps {
   pitchId: string;
   searchParams: Record<string, string | string[] | undefined>;
   apiBase: string;
+  cookieHeader?: string;
 }
 
-export async function PitchDetailPage({ session, pitchId, searchParams, apiBase }: PitchDetailPageProps) {
+export async function PitchDetailPage({ session, pitchId, searchParams, apiBase, cookieHeader }: PitchDetailPageProps) {
   void searchParams;
-  const client = createCommunityClient({ baseUrl: apiBase.replace(/\/api\/community$/, '') });
+  const client = createCommunityClient({ baseUrl: apiBase.replace(/\/api\/community$/, ''), cookieHeader });
   const pitch = await client.pitches.get(pitchId);
 
   if (!pitch) {

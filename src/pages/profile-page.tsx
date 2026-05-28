@@ -9,12 +9,13 @@ export interface ProfilePageProps {
   handle: string;
   searchParams: Record<string, string | string[] | undefined>;
   apiBase: string;
+  cookieHeader?: string;
   session: CommunitySession | null;
 }
 
-export async function ProfilePage({ handle, searchParams, apiBase, session }: ProfilePageProps) {
+export async function ProfilePage({ handle, searchParams, apiBase, session, cookieHeader }: ProfilePageProps) {
   void searchParams;
-  const client = createCommunityClient({ baseUrl: apiBase.replace(/\/api\/community$/, '') });
+  const client = createCommunityClient({ baseUrl: apiBase.replace(/\/api\/community$/, ''), cookieHeader });
   const profile = await client.profiles.getByHandle(handle);
 
   if (!profile) {

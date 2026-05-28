@@ -6,11 +6,12 @@ export interface SettingsPageProps {
   session: CommunitySession;
   searchParams: Record<string, string | string[] | undefined>;
   apiBase: string;
+  cookieHeader?: string;
 }
 
-export async function SettingsPage({ session, searchParams, apiBase }: SettingsPageProps) {
+export async function SettingsPage({ session, searchParams, apiBase, cookieHeader }: SettingsPageProps) {
   void searchParams;
-  const client = createCommunityClient({ baseUrl: apiBase.replace(/\/api\/community$/, '') });
+  const client = createCommunityClient({ baseUrl: apiBase.replace(/\/api\/community$/, ''), cookieHeader });
   const profile = await client.profiles.getByHandle(session.handle);
 
   if (!profile) {

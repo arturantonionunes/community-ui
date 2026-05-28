@@ -7,9 +7,10 @@ export interface PitchNewPageProps {
   session: CommunitySession | null;
   searchParams: Record<string, string | string[] | undefined>;
   apiBase: string;
+  cookieHeader?: string;
 }
 
-export async function PitchNewPage({ session, searchParams, apiBase }: PitchNewPageProps) {
+export async function PitchNewPage({ session, searchParams, apiBase, cookieHeader }: PitchNewPageProps) {
   void searchParams;
   void apiBase;
 

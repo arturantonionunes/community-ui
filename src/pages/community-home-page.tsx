@@ -7,9 +7,10 @@ export interface CommunityHomePageProps {
   session: CommunitySession | null;
   searchParams: Record<string, string | string[] | undefined>;
   apiBase: string;
+  cookieHeader?: string;
 }
 
-export async function CommunityHomePage({ session, searchParams, apiBase }: CommunityHomePageProps) {
+export async function CommunityHomePage({ session, searchParams, apiBase, cookieHeader }: CommunityHomePageProps) {
   if (!session) {
     return (
       <main className="mx-auto max-w-2xl px-4 py-10">
@@ -18,7 +19,7 @@ export async function CommunityHomePage({ session, searchParams, apiBase }: Comm
     );
   }
 
-  const client = createCommunityClient({ baseUrl: apiBase.replace(/\/api\/community$/, '') });
+  const client = createCommunityClient({ baseUrl: apiBase.replace(/\/api\/community$/, ''), cookieHeader });
   const rooms = await client.rooms.listVisible();
 
   if (rooms.length === 0) {
