@@ -87,10 +87,11 @@ export function ChatShell({ me, rooms, initialRoomSlug, initialMessages }: ChatS
   };
 
   return (
-    <div className="grid h-[calc(100vh-80px)] grid-cols-[220px_1fr_180px]">
-      <aside className="overflow-y-auto border-r p-3">
+    <div className="grid h-[calc(100vh-80px)] grid-cols-[260px_1fr_220px] bg-background">
+      {/* Left rail */}
+      <aside className="flex min-h-0 flex-col overflow-y-auto border-r bg-card/30">
         <RoomList rooms={rooms} activeSlug={mode === 'room' ? activeSlug : ''} onSelect={onSelectRoom} />
-        <div className="mt-4">
+        <div className="mt-2 px-1">
           <DmSidebar
             inbox={dm.inbox}
             requestsCount={dm.requests.length}
@@ -100,36 +101,45 @@ export function ChatShell({ me, rooms, initialRoomSlug, initialMessages }: ChatS
             onSelectRequests={onSelectRequests}
           />
         </div>
-        <nav className="mt-4 flex flex-col gap-1">
-          <Link
-            href="/community/pitches"
-            className="block rounded-md px-2 py-1.5 text-sm text-foreground no-underline transition-colors hover:bg-accent/50"
-          >
-            📰 Pitches
-          </Link>
-          <Link
-            href="/community/experts"
-            className="block rounded-md px-2 py-1.5 text-sm text-foreground no-underline transition-colors hover:bg-accent/50"
-          >
-            🔍 Experts
-          </Link>
-        </nav>
+        <div className="mt-auto border-t bg-card/50 p-2">
+          <p className="px-2 pb-1 pt-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+            Workspace
+          </p>
+          <nav className="flex flex-col gap-0.5">
+            <Link
+              href="/community/pitches"
+              className="flex items-center gap-2 rounded-md px-2 py-1.5 text-sm text-muted-foreground no-underline transition-colors hover:bg-accent/50 hover:text-foreground"
+            >
+              <span className="text-base leading-none" aria-hidden>📰</span>
+              <span>Pitches</span>
+            </Link>
+            <Link
+              href="/community/experts"
+              className="flex items-center gap-2 rounded-md px-2 py-1.5 text-sm text-muted-foreground no-underline transition-colors hover:bg-accent/50 hover:text-foreground"
+            >
+              <span className="text-base leading-none" aria-hidden>🔍</span>
+              <span>Experts</span>
+            </Link>
+          </nav>
+        </div>
       </aside>
 
-      <section className="flex min-w-0 flex-col">
+      {/* Center */}
+      <section className="flex min-w-0 min-h-0 flex-col">
         {mode === 'room' && !roomConnected && (
-          <div className="bg-amber-100 p-1.5 text-center text-xs text-amber-800">
+          <div className="border-b border-amber-500/30 bg-amber-50 px-4 py-1.5 text-center text-xs text-amber-800 dark:bg-amber-500/10 dark:text-amber-300">
             Reconnecting…
           </div>
         )}
         {mode === 'dm' && !dm.connected && (
-          <div className="bg-amber-100 p-1.5 text-center text-xs text-amber-800">
+          <div className="border-b border-amber-500/30 bg-amber-50 px-4 py-1.5 text-center text-xs text-amber-800 dark:bg-amber-500/10 dark:text-amber-300">
             Reconnecting…
           </div>
         )}
         {mode === 'room' && (
           <RoomView
-            roomName={activeRoom?.name ?? '#' + activeSlug}
+            roomName={activeRoom?.name ?? activeSlug}
+            isVerifiedOnly={activeRoom?.isVerifiedOnly}
             canPost={canPost}
             postRestrictionReason={!canPost ? 'Only verified journalists post here. Read access is open.' : undefined}
             messages={messages}
@@ -145,7 +155,8 @@ export function ChatShell({ me, rooms, initialRoomSlug, initialMessages }: ChatS
         )}
       </section>
 
-      <aside className="overflow-y-auto border-l p-3">
+      {/* Right rail */}
+      <aside className="overflow-y-auto border-l bg-card/30 px-3 py-4">
         <PresenceList online={dm.presence.online} journalists={dm.presence.journalists} />
       </aside>
     </div>
